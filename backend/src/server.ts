@@ -14,12 +14,12 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://fehmatos.github.io"],
-    methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
+    origin: "https://fehmatos.github.io",
+    methods: ["GET", "POST", "PATCH", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true,
   })
 );
+
 app.options("*", cors());
 
 app.use((req: Request, res: Response, next: NextFunction): void => {
