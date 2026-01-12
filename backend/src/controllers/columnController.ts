@@ -14,10 +14,10 @@ const getColumns: RequestHandler = async (req, res) => {
 
     res.status(200).json(columns);
   } catch (error) {
-    console.error("Erro ao buscar colunas:", error);
+    console.error("Erro retrieving columns:", error);
     res.status(500).json({
-      error: "Erro interno do servidor ao buscar colunas.",
-      details: error instanceof Error ? error.message : "Erro desconhecido",
+      error: "Internal Server Error while retrieving columns.",
+      details: error instanceof Error ? error.message : "Unknown Error",
     });
   }
 };

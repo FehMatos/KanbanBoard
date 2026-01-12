@@ -222,7 +222,7 @@ function Home() {
     });
 
     if (!response.ok) {
-      console.error("Erro ao mover task");
+      console.error("Error moving");
       return;
     }
 
