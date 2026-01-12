@@ -18,7 +18,6 @@ const columnSchema = new Schema<ColumnDocument>({
   },
   position: {
     type: Number,
-    unique: true,
   },
   user_id: {
     type: String,
