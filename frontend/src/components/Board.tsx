@@ -5,6 +5,10 @@ import {
   closestCenter,
   DragEndEvent,
   UniqueIdentifier,
+  TouchSensor,
+  useSensor,
+  useSensors,
+  MouseSensor,
 } from "@dnd-kit/core";
 
 import type { BoardProps } from "../types/board";
@@ -44,9 +48,24 @@ export default function Board({
     moveTask(taskId, targetColumnId);
   }
 
+  const sensors = useSensors(
+    useSensor(MouseSensor, {
+      activationConstraint: {
+        distance: 5, // evita drag acidental no desktop
+      },
+    }),
+    useSensor(TouchSensor, {
+      activationConstraint: {
+        delay: 150,
+        tolerance: 5,
+      },
+    })
+  );
+
   return (
     <>
       <DndContext
+        sensors={sensors}
         collisionDetection={closestCenter}
         onDragStart={(event) => {
           setActiveTask(event.active.id);
