@@ -11,5 +11,5 @@
     "skipLibCheck": true,
     "verbatimModuleSyntax": false
   },
-  "include": ["src"]
+  "include": ["src", "../config"]
 }

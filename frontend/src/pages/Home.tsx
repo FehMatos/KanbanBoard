@@ -4,6 +4,7 @@ import Board from "../components/Board";
 import FehFooter from "../components/FehFooter";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { Column, Task, AddColumnInput, AddTaskInput } from "../types/kanban";
+import { API_URL } from "../config/api";
 
 function Home() {
   const [columns, setColumns] = useState<Column[]>([]);
@@ -14,7 +15,7 @@ function Home() {
   useEffect(() => {
     if (!user) return;
     const fetchColumns = async () => {
-      const response = await fetch("/api/columns", {
+      const response = await fetch(`${API_URL}/api/columns`, {
         headers: { Authorization: `Bearer ${user.token}` },
       });
       const json = await response.json();
@@ -31,7 +32,7 @@ function Home() {
   useEffect(() => {
     if (!user) return;
     const fetchTasks = async () => {
-      const response = await fetch("/api/tasks", {
+      const response = await fetch(`${API_URL}/api/tasks`, {
         headers: { Authorization: `Bearer ${user.token}` },
       });
       const json = await response.json();
@@ -54,7 +55,7 @@ function Home() {
       return;
     }
 
-    const response = await fetch("/api/columns", {
+    const response = await fetch(`${API_URL}/api/columns`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -79,7 +80,7 @@ function Home() {
       return;
     }
 
-    const response = await fetch("/api/tasks", {
+    const response = await fetch(`${API_URL}/api/tasks`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -104,7 +105,7 @@ function Home() {
     if (!user) {
       return;
     }
-    const response = await fetch(`/api/columns/${id}`, {
+    const response = await fetch(`${API_URL}/api/columns/${id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${user.token}`,
@@ -127,7 +128,7 @@ function Home() {
       return;
     }
 
-    const response = await fetch(`/api/tasks/${id}`, {
+    const response = await fetch(`${API_URL}/api/tasks/${id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${user.token}`,
@@ -150,7 +151,7 @@ function Home() {
       return;
     }
 
-    const response = await fetch(`/api/columns/${id}`, {
+    const response = await fetch(`${API_URL}/api/columns/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -177,7 +178,7 @@ function Home() {
       setError("You must be logged in");
       return;
     }
-    const response = await fetch(`/api/columns/${id}`, {
+    const response = await fetch(`${API_URL}/api/columns/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -214,7 +215,7 @@ function Home() {
 
     const newPosition = tasksInColumn.length;
 
-    const response = await fetch(`/api/tasks/${taskId}`, {
+    const response = await fetch(`${API_URL}/api/tasks/${taskId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

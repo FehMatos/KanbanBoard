@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAuthContext } from "./useAuthContext";
 import type { User } from "../context/AuthContext";
+import { API_URL } from "../config/api";
 
 interface UseSignupReturn {
   signup: (email: string, password: string) => Promise<void>;
@@ -17,7 +18,7 @@ export const useSignup = (): UseSignupReturn => {
     setIsLoading(true);
     setError(null);
 
-    const response = await fetch("/api/user/signup", {
+    const response = await fetch(`${API_URL}/api/user/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
