@@ -12,15 +12,14 @@ const app = express();
 
 app.use(express.json());
 
-app.use(
-  cors({
-    origin: "https://fehmatos.github.io",
-    methods: ["GET", "POST", "PATCH", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
+const corsOptions = {
+  origin: "https://fehmatos.github.io",
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
 
-app.options("*", cors());
+app.use("/api/user", cors(corsOptions), userRoutes);
+app.use("/api/columns", cors(corsOptions), columnRoutes);
+app.use("/api/tasks", cors(corsOptions), taskRoutes);
 
 app.use((req: Request, res: Response, next: NextFunction): void => {
   console.log(req.path, req.method);
